@@ -161,5 +161,35 @@ sudo docker run -p 8081:8080 --name simpleapi_student --network app-network -d s
 
 ## http server
 
+- Dockerfile for the http server:
+```Dockerfile
+FROM httpd:2.4
+COPY ./index.html /usr/local/apache2/htdocs/
+COPY ./httpd.conf /usr/local/apache2/conf/httpd.conf
+```
+
+- We copy a new httpd.conf with this new configuration:
+```conf
+<VirtualHost *:80>
+    ProxyPreserveHost On
+    ProxyPass / http://simpleapi_student:8080/
+    ProxyPassReverse / http://simpleapi_student:8080/
+</VirtualHost>
+LoadModule proxy_module modules/mod_proxy.so
+LoadModule proxy_http_module modules/mod_proxy_http.so
+```
+- image build:
+```bash
+sudo docker build . -t apache
+```
+
+- container creation:
+```bash
+sudo docker run --name apache-serv --network app-network -p 80:80 -d apache
+```
+
+We now have access to the "simple_api" web page when we go on http://localhost/.
+
 __Q: Why do we need a reverse proxy?__
+
 A reverse proxy has several advantages. One of those is that it allows us to use one port on the host to redirect to several websites. Another advantage is a better 
