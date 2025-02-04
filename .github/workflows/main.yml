@@ -33,16 +33,16 @@ jobs:
         with:
           push: ${{ github.ref == 'refs/heads/master' }}
           context: tp1/backend/simple-api-student
-          tags:  ${{ secrets.DOCKER_USERNAME  }}/tp-devops-simple-api:latest
+          tags:  ${{ secrets.DOCKER_USERNAME  }}/tp-devops-simple-api:${{ env.VERSION }}
       - name: Build image and push database
         uses: docker/build-push-action@v6
         with:
           push: ${{ github.ref == 'refs/heads/master' }}
           context: tp1/pgsql
-          tags:  ${{ secrets.DOCKER_USERNAME  }}/pgsql-simple-api:latest
+          tags:  ${{ secrets.DOCKER_USERNAME  }}/pgsql-simple-api:${{ env.VERSION }}
       - name: Build image and push httpd
         uses: docker/build-push-action@v6
         with:
           push: ${{ github.ref == 'refs/heads/master' }}
           context: tp1/http_server
-          tags:  ${{ secrets.DOCKER_USERNAME  }}/http-simple-api:latest
+          tags:  ${{ secrets.DOCKER_USERNAME  }}/http-simple-api:${{ env.VERSION }}
