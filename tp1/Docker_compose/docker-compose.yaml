@@ -4,7 +4,7 @@ services:
         context: ./compose/backend
       networks:
         backend:
-        frontend:
+        http:
       depends_on:
         - db
     db:
@@ -22,13 +22,13 @@ services:
       ports:
         - "80:80"
       networks:
-        frontend:
+        http:
       depends_on:
         - backend
 
 networks:
     backend:
-    frontend:
+    http:
 
 volumes:
   vol_pgsql:

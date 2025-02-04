@@ -10,16 +10,47 @@ jobs:
     runs-on: ubuntu-22.04
     steps:
      #checkout your github code using actions/checkout@v2.5.0
-      - uses: actions/checkout@v2.5.0
+      - uses: actions/checkout@v4
 
      #do the same with another action (actions/setup-java@v3) that enable to setup jdk 21
       - name: Set up JDK 21
         uses: actions/setup-java@v4
         with:
           java-version: '21'
-          distribution: 'temurin'
-          cache: maven
+          distribution: 'corretto'
 
      #finally build your app with the latest command
       - name: Build and test with Maven
-        run: mvn clean verify -f tp1/backend/simple-api-student/pom.xml
+        run: mvn clean verify 
+        working-directory: tp1/backend/simple-api-student
+  # define job to build and publish docker image
+  build-and-push-docker-image:
+    needs: test-backend
+    # run only when code is compiling and tests are passing
+    runs-on: ubuntu-22.04
+
+    # steps to perform in job
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+      - name: Build image and push backend
+        uses: docker/build-push-action@v6
+        with:
+          # relative path to the place where source code with Dockerfile is located
+          context: tp1/backend/simple-api-student
+          # Note: tags has to be all lower-case
+          tags:  ${{secrets.DOCKERHUB_USERNAME}}/tp-devops-simple-api:latest
+
+      - name: Log in to Docker Hub
+        uses: docker/login-action@f4ef78c080cd8ba55a85445d5b36e214a81df20a
+        with:
+          username: ${{ secrets.DOCKER_USERNAME }}
+          password: ${{ secrets.DOCKER_PASSWORD }}
+          
+      - name: Build image and push database
+          context: tp1/pgsql
+          tags:  ${{secrets.DOCKERHUB_USERNAME}}/pgsql-simple-api:latest
+
+      - name: Build image and push httpd
+          context: tp1/http_server
+          tags:  ${{secrets.DOCKERHUB_USERNAME}}/http-simple-api:latest
