@@ -1,7 +1,9 @@
 name: CI devops 2025
 on:
   push:
-    branches: develop
+    branches: 
+        - develop
+        - master 
   pull_request:
 
 jobs:
