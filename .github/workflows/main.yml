@@ -24,6 +24,7 @@ jobs:
         working-directory: tp1/backend/simple-api-student
   # define job to build and publish docker image
   build-and-push-docker-image:
+    needs: test-backend
     permissions:
       packages: write
       contents: read
