@@ -55,6 +55,6 @@ jobs:
       - name: Build image and push httpd
         uses: docker/build-push-action@v6
         with:
-          push: ${{ github.ref == 'refs/heads/master' }}e
+          push: ${{ github.ref == 'refs/heads/master' }}
           context: tp1/http_server
           tags:  ${{ secrets.DOCKER_USERNAME  }}/http-simple-api:latest
