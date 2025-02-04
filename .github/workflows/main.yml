@@ -22,4 +22,4 @@ jobs:
 
      #finally build your app with the latest command
       - name: Build and test with Maven
-        run: ls -al tp1/backend/simple-api-student/pom.xml
+        run: ls -al tp1/backend/simple-api-student/
