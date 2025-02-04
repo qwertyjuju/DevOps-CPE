@@ -55,4 +55,4 @@ jobs:
         uses: docker/build-push-action@v6
         with:
           context: tp1/http_server
-          tags:  ${{secrets.DOCKERHUB_USERNAME}}/http-simple-api:latest
+          tags:  ${{ secrets.DOCKERHUB_USERNAME }}/http-simple-api:latest
