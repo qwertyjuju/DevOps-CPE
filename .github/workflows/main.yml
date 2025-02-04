@@ -19,7 +19,7 @@ jobs:
       id-token: write
     # run only when code is compiling and tests are passing
     runs-on: ubuntu-22.04
-    # steps to perform in job
+    # steps to perform in job.
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
