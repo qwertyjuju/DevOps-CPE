@@ -1,0 +1,34 @@
+services:
+    backend:
+      build: 
+        context: ./compose/backend
+      networks:
+        backend:
+        frontend:
+      depends_on:
+        - db
+    db:
+      build:
+        context: ./compose/db
+      networks:
+        backend:
+      env_file:
+        - .env
+      volumes:
+        - vol_pgsql:/var/lib/mysql
+    httpd:
+      build:
+        context: ./compose/http
+      ports:
+        - "80:80"
+      networks:
+        frontend:
+      depends_on:
+        - backend
+
+networks:
+    backend:
+    frontend:
+
+volumes:
+  vol_pgsql:

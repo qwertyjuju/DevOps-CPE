@@ -9,6 +9,8 @@
     - [Basics](#basics-1)
     - [Multistage build](#multistage-build)
   - [http server](#http-server)
+  - [Docker compose](#docker-compose)
+  - [Publish](#publish)
 
 ## Database
 ### Basics
@@ -192,4 +194,73 @@ We now have access to the "simple_api" web page when we go on http://localhost/.
 
 __Q: Why do we need a reverse proxy?__
 
-A reverse proxy has several advantages. One of those is that it allows us to use one port on the host to redirect to several websites. Another advantage is a better 
+A reverse proxy has several advantages. One of those is that it allows us to use one port on the host to redirect to several websites. Another benefit is security: the websites are safeguarded behind the proxy and can only be accessed through it (assuming the proxy  and the web containers are properly configured).
+
+## Docker compose
+```yaml
+services:
+    backend:
+      build: 
+        context: ./compose/backend
+      networks:
+        backend:
+        http:
+      depends_on:
+        - db
+    db:
+      build:
+        context: ./compose/db
+      networks:
+        backend:
+      env_file:
+        - .env
+      volumes:
+        - vol_pgsql:/var/lib/mysql
+    httpd:
+      build:
+        context: ./compose/http
+      ports:
+        - "80:80"
+      networks:
+        http:
+      depends_on:
+        - backend
+
+networks:
+    backend:
+    http:
+
+volumes:
+  vol_pgsql:
+
+```
+- In this dokcer compose:
+  - Three services: java backend, postgresql database and apache reverse proxy. 
+  - Two separate networks: a backend network with the db and the java backend services connected to it and a frontend network with the http and backend service. 
+  - one volume: backup of the database data
+  - Only the reverse proxy is exposed on the host (port 80 is forwarded on the host)
+- command to run  the docker compose:
+```bash
+sudo docker compose up -d
+```
+- command to kill the docker compose:
+```bash
+sudo docker compose down
+```
+
+__Q: Why is docker-compose so important?__
+
+docker compose is important to easily setup several containers at the same time. It is easily replicable and is much easier to use rather than create each container with the command line. It is also easier to link the containers between them.
+
+## Publish
+
+- commands to publish "pgsql" docker image to docker hub:
+```bash
+docker login -u qwertyjuju -p ******** docker.io
+sudo docker tag pgsql qwertyjuju/pgsql:1.0
+sudo docker push qwertyjuju/pgsql:1.0
+```
+
+__Q: Why do we put our images into an online repo?__
+
+It is useful to publish images into an online repo so that we can have acces to it whenever and wherever we want.
