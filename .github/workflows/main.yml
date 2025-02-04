@@ -33,24 +33,23 @@ jobs:
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
-      - name: Build image and push backend
-        uses: docker/build-push-action@v6
-        with:
-          # relative path to the place where source code with Dockerfile is located
-          context: tp1/backend/simple-api-student
-          # Note: tags has to be all lower-case
-          tags:  ${{secrets.DOCKERHUB_USERNAME}}/tp-devops-simple-api:latest
-
       - name: Log in to Docker Hub
         uses: docker/login-action@f4ef78c080cd8ba55a85445d5b36e214a81df20a
         with:
           username: ${{ secrets.DOCKER_USERNAME }}
           password: ${{ secrets.DOCKER_PASSWORD }}
-          
+      - name: Build image and push backend
+        uses: docker/build-push-action@v6
+        with:
+          context: tp1/backend/simple-api-student
+          tags:  ${{secrets.DOCKERHUB_USERNAME}}/tp-devops-simple-api:latest
       - name: Build image and push database
+        uses: docker/build-push-action@v6
+        with:
           context: tp1/pgsql
           tags:  ${{secrets.DOCKERHUB_USERNAME}}/pgsql-simple-api:latest
-
       - name: Build image and push httpd
+        uses: docker/build-push-action@v6
+        with:
           context: tp1/http_server
           tags:  ${{secrets.DOCKERHUB_USERNAME}}/http-simple-api:latest
