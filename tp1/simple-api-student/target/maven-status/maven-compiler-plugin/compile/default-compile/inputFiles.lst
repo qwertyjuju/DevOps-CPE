@@ -1,0 +1,10 @@
+/srv/docker/tp1/backend/simple-api-student/src/main/java/fr/takima/training/simpleapi/SimpleApiApplication.java
+/srv/docker/tp1/backend/simple-api-student/src/main/java/fr/takima/training/simpleapi/controller/DepartmentController.java
+/srv/docker/tp1/backend/simple-api-student/src/main/java/fr/takima/training/simpleapi/controller/GreetingController.java
+/srv/docker/tp1/backend/simple-api-student/src/main/java/fr/takima/training/simpleapi/controller/StudentController.java
+/srv/docker/tp1/backend/simple-api-student/src/main/java/fr/takima/training/simpleapi/dao/DepartmentDAO.java
+/srv/docker/tp1/backend/simple-api-student/src/main/java/fr/takima/training/simpleapi/dao/StudentDAO.java
+/srv/docker/tp1/backend/simple-api-student/src/main/java/fr/takima/training/simpleapi/entity/Department.java
+/srv/docker/tp1/backend/simple-api-student/src/main/java/fr/takima/training/simpleapi/entity/Student.java
+/srv/docker/tp1/backend/simple-api-student/src/main/java/fr/takima/training/simpleapi/service/DepartmentService.java
+/srv/docker/tp1/backend/simple-api-student/src/main/java/fr/takima/training/simpleapi/service/StudentService.java
