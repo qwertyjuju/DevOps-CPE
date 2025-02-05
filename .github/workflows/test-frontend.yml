@@ -14,7 +14,8 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: 18
-      - run: npm install --global yarn
+      - name: install yarn
+        run: npm install --global yarn
       - name: config yarn
         uses: borales/actions-yarn@v4
         with:
