@@ -1,0 +1,15 @@
+name: push-to-prod
+on: 
+  workflow_run:
+    workflows: 
+      - build
+    types:
+      - completed
+    branches: master
+jobs:
+    push-to-prod:
+        runs-on: ubuntu-22.04
+        steps:
+            - name: push to server
+              uses: docker/build-push-action@v6
+              with:
