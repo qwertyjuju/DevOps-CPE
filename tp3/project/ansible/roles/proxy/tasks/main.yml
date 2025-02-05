@@ -1,0 +1,7 @@
+- name: Run HTTPD
+  docker_container:
+    name: httpd
+    image: qwertyjuju/http-simple-api:latest
+    published_ports: 80:80
+    networks:
+      - name: http
