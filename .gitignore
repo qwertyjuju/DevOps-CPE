@@ -1,1 +1,4 @@
 /tp1/vol
+
+*.env
+.env.local
