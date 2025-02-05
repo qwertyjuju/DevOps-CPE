@@ -2,6 +2,7 @@
   docker_container:
     name: httpd
     image: qwertyjuju/http-simple-api:latest
+    pull: yes
     published_ports: 80:80
     networks:
       - name: http
