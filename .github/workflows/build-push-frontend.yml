@@ -2,7 +2,7 @@ name: build-push-frontend
 on: 
   workflow_run:
     workflows: 
-      - test-backend-devops-2025
+      - test-frontend-devops
     types:
       - completed
     branches: master

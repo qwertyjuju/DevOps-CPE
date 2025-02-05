@@ -14,7 +14,11 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: 18
-
+      - name: config yarn
+        uses: borales/actions-yarn@v4
+        with:
+          cmd: yarn config set strict-ssl false
+          dir: tp3/project/front
       - name: Run install
         uses: borales/actions-yarn@v4
         with:
