@@ -58,6 +58,3 @@
     name: docker
     state: started
   tags: docker
-
-- name: Remove dockers
-  command: sudo docker rm -f $(sudo docker ps -qa)
