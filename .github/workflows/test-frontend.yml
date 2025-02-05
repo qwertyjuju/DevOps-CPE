@@ -1,4 +1,4 @@
-name: test-frontend-devops-2025
+name: test-frontend-devops
 on:
     push:
         branches: 
@@ -6,9 +6,8 @@ on:
             - master 
 
 jobs:
-  build:
-    name: Test
-    runs-on: ubuntu-latest
+  test-backend: 
+    runs-on: ubuntu-22.04
     steps:
       - uses: actions/checkout@v3
       - name: Set Node.js 16.x

@@ -1,4 +1,4 @@
-name: test-backend-devops-2025
+name: test-backend-devops
 on:
   push:
     branches: 
