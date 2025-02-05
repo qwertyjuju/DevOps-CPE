@@ -7,6 +7,7 @@
   docker_container:
     name: db
     image: qwertyjuju/pgsql-simple-api:latest
+    env_file: ./.env
     networks:
       - name: http
       - name: backend 
