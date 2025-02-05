@@ -1,0 +1,7 @@
+- name: Run frontend
+  docker_container:
+    name: frontend
+    image: qwertyjuju/frontend-simple-api:latest
+    networks:
+      - name: http
+      - name: backend 
