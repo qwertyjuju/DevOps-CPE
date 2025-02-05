@@ -1,3 +1,4 @@
+"""
 name: build-push-frontend
 on: 
   workflow_run:
@@ -33,3 +34,4 @@ jobs:
           push: ${{ github.ref == 'refs/heads/master' }}
           context: tp3/project/front
           tags: ${{ secrets.DOCKER_USERNAME  }}/frontend-simple-api:${{ env.VERSION }}
+"""
