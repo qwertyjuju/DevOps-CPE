@@ -3,6 +3,8 @@
     name: httpd
     image: qwertyjuju/http-simple-api:latest
     pull: yes
-    published_ports: 80:80
+    published_ports: 
+      - 80:80
+      - 8080:8080
     networks:
       - name: http
