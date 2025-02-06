@@ -5,4 +5,3 @@
     image: qwertyjuju/frontend-simple-api:latest
     networks:
       - name: http
-      - name: backend 
