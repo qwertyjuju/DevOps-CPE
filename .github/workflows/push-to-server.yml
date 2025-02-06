@@ -26,7 +26,7 @@ jobs:
       - name: Ajouter la clé SSH
         run: |
           mkdir -p ~/.ssh
-          echo "${{ secrets.ENV }}" > tp3/project/ansible/roles/database/.env
+          echo "${{ secrets.ENV }}" > tp3/project/ansible/roles/database/tasks/.env
           ssh-keyscan -H ${{ secrets.SERVER_IP }} >> ~/.ssh/known_hosts
 
       - name: Installer Ansible
@@ -36,5 +36,4 @@ jobs:
 
       - name: Exécuter le Playbook Ansible
         run: |
-          ansible-playbook -i tp3/project/ansible/inventories/setup.yml tp3/project/ansible/
-          laybook.yml
+          ansible-playbook -i tp3/project/ansible/inventories/setup.yml tp3/project/ansible/playbook.yml
