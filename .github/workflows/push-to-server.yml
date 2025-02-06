@@ -8,10 +8,16 @@ on:
       - master
 jobs:
   run-ansible-playbook:
+    if: ${{ github.event.workflow_run.conclusion == 'success' }}
+    permissions:
+        packages: write
+        contents: read
+        attestations: write
+        id-token: write
     runs-on: ubuntu-22.04
     steps:
       - uses: actions/checkout@v4
-      
+
       - uses: webfactory/ssh-agent@v0.9.0
         with: 
           ssh-private-key: ${{ secrets.SSH_KEY }}
