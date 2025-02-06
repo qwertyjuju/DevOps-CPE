@@ -23,7 +23,7 @@ jobs:
         with: 
           ssh-private-key: ${{ secrets.SSH_KEY }}
 
-      - name: Ajouter la clé SSH
+      - name: Ajouter l'env
         run: |
           mkdir -p ~/.ssh
           echo "${{ secrets.ENV }}" > tp3/project/ansible/roles/database/tasks/.env
