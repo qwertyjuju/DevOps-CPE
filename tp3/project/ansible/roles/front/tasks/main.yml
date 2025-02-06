@@ -1,5 +1,6 @@
 - name: Run frontend
   docker_container:
+    pull: yes
     name: frontend
     image: qwertyjuju/frontend-simple-api:latest
     networks:

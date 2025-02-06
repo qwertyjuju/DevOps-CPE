@@ -6,6 +6,7 @@
 - name: Run database
   docker_container:
     name: db
+    pull: yes
     image: qwertyjuju/pgsql-simple-api:latest
     env_file: ./.env
     networks:

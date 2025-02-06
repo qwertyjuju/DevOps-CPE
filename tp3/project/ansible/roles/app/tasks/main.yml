@@ -1,6 +1,7 @@
 - name: Run app
   docker_container:
     name: simpleapi_student
+    pull: yes
     image: qwertyjuju/tp-devops-simple-api:latest
     networks:
       - name: backend
