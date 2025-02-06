@@ -1,7 +1,8 @@
 name: Push docker and deploy 
 on: 
   workflow_run:
-    workflows: ["build-push-all"]
+    workflows: 
+      - build-push-all
     types:
       - completed
     branches:
@@ -25,7 +26,7 @@ jobs:
       - name: Ajouter la clé SSH
         run: |
           mkdir -p ~/.ssh
-          echo "${{ secrets.ENV }}" > ansible/.env
+          echo "${{ secrets.ENV }}" > tp3/project/ansible/roles/database/.env
           ssh-keyscan -H ${{ secrets.SERVER_IP }} >> ~/.ssh/known_hosts
 
       - name: Installer Ansible
@@ -35,4 +36,5 @@ jobs:
 
       - name: Exécuter le Playbook Ansible
         run: |
-          ansible-playbook -i ansible/inventories/setup.yml ansible/inventories/playbook.yml
+          ansible-playbook -i tp3/project/ansible/inventories/setup.yml tp3/project/ansible/
+          laybook.yml
